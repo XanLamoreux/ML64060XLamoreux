@@ -8,3 +8,20 @@ df <- read.csv('UniversalBank.csv')
 head(df)
 df
 ```
+summary(df)
+# Going to run a series of checks so I can understand what the data contains and to test the given elements such as that the assignment states that 480 or 9.6% of customers accepted personal loans
+sum(df$Personal.Loan)
+count(df$ID)
+# so count is not a function in R - I'm going to google how to count records I think it has something to do with nrow
+# Maybe not but google says to try data.frame(table( )) so I'm going to try that
+data.frame(df(df$ID))
+data.frame(UniversalBank(df$ID))
+nrow(df)
+# so it is nrow! That's good! I'll assume it can do the same thing with columns
+ncol(df)
+# I see there are negative numbers in experience so those must be typos I'm going to see how many of them are negative numbers you obviously can't have negative experience because you can't have negative time
+count(df$ID < 0)
+# That didn't work
+sum(df$ID < 0)
+nrow(df[df$Experience < 0,])
+# that worked and returned the number of records where Experience is less than zero
