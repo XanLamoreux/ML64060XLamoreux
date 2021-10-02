@@ -1,1 +1,10 @@
 df <- read.csv('UniversalBank.csv')
+head(df)
+summary(df)
+mean(df$Age)
+
+```{r}
+df <- read.csv('UniversalBank.csv')
+head(df)
+df
+```
