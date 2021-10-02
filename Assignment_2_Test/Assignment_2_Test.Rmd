@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 df <- read.csv('UniversalBank.csv')
 head(df)
 summary(df)
@@ -25,3 +30,5 @@ count(df$ID < 0)
 sum(df$ID < 0)
 nrow(df[df$Experience < 0,])
 # that worked and returned the number of records where Experience is less than zero
+480/5000
+# The math works 480 Personal Loans by the number of customers equals 0.096 which is 9.6% as given in the assignment
