@@ -3,6 +3,7 @@ output:
   pdf_document: default
   html_document: default
 ---
+library(dplyr)
 df <- read.csv('UniversalBank.csv')
 head(df)
 summary(df)
@@ -32,3 +33,65 @@ nrow(df[df$Experience < 0,])
 # that worked and returned the number of records where Experience is less than zero
 480/5000
 # The math works 480 Personal Loans by the number of customers equals 0.096 which is 9.6% as given in the assignment
+library(caret)
+library(FNN)
+install.packages("caret")
+# That is already done so let's forget about that for now
+# going to try to get rid of ID and Zip Code
+df=subset(df, select=-c(ID, Zip.Code))
+colnames(df)
+drop_cols <- c('ID', 'Zip.Code')
+df <- df[ , !(names(df) %in% drop_cols)]
+colnames(df)
+# I want to get rid of negative experience
+df[(df$Experience < 0), 'Experience'] <- 0
+df[(df$Personal.Loan > 0) & (df$Securities.Account > 0) &
+(df$CD.Account > 0),]
+nrow(df[(df$Personal.Loan > 0) & (df$Securities.Account > 0) &
+(df$CD.Account > 0),])
+nrow(df[df$Age == 40) & (df$Experience == 10) & (df$Income == 84) & (df$Family == 2) & (df$CCAvg == 2) & (df$Education == 2),])
+nrow(df[(df$Age == 40) & (df$Experience == 10) & (df$Income == 84) & (df$Family == 2) & (df$CCAvg == 2) & (df$Education == 2), ])
+summary(df)
+
+# I am trying to look at grouping here let's see
+df$Exp_Group <- ifelse(df$Experience <= 10, 1, ifelse(df$Experience > 10 & df$Experience <= 20, 2, ifelse(df$Experience > 20 & df$Experience <= 30, 3, 4)))
+# I don't like these groups so I want to parse it down a little more
+
+df$Exp_Group <- ifelse(df$Experience <= 5, 1, ifelse(df$Experience > 5 & df$Experience <= 10, 2, ifelse(df$Experience > 10 & df$Experience <= 15, 3, ifelse(df$Experience >15 & df$Experience <= 20, 4, ifelse(df$Experience > 20 & df$Experience <= 25, 5, ifelse(df$Experience > 25 & df$Experience <= 30, 6, ifelse(df$Experience > 30 & df$Experience <= 35, 7, ifelse(df$Experience > 35 & df$Experience <= 40, 8, 9))))))))
+
+# I want to count how many 1, 2, 3, 4 are in the new Exp_Group column
+# Grouped the experience more than just 4 to see if experience changed the mean income per group it didn't change it as much as I thought it would
+
+df$Exp_Group <- as.factor(df$Exp_Group)
+table(df$Exp_Group)
+
+# Average income in each of the Exp_Group
+
+df %>%
+group_by(Exp_Group) %>%
+summarize(mean_Income = mean(Income))
+
+# Let's try age groups
+df$Age_Group <- ifelse(df$Age <= 25, 1, ifelse(df$Age > 25 & df$Age <= 30, 2, ifelse(df$Age > 30 & df$Age <= 35, 3, ifelse(df$Age > 35 & df$Age <= 40, 4, ifelse(df$Age > 40 & df$Age <= 45, 5, ifelse(df$Age > 45 & df$Age <= 50, 6, ifelse(df$Age > 50 & df$Age <= 55, 7, ifelse(df$Age > 55 & df$Age <= 60, 8, 9))))))))
+
+# Trying to plot Age vs. Exp and it is not working
+plot(df(Age_Group, Exp_Group))
+
+table(df$Age_Group)
+
+# going to try to make some dummy variables and see what happens
+# I think I need to load some other library
+# That does not exist trying something else
+
+
+dummy_education <- as.data.frame(df$Education)
+# changing 1,2,3 in education to Education_1, Education_2, Education_3
+# I don't understand how this will even work I think I should just change the 1,2,3 in the original df to Education_1, ..._2, and ..._3
+
+Education <- dummyVars(~Education,df)
+library(ISLR)
+
+library(dplyr)
+
+
+
