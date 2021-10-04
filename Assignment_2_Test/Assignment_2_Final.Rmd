@@ -1,0 +1,178 @@
+---
+title: "Assignment2_Final"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+install.packages("class")
+
+```{r}
+MyDF <- read.csv("UniversalBank.csv")
+```
+
+```{r}
+library(dummies)
+library(ISLR)
+
+MyDF$Education = as.factor(MyDF$Education)
+# Education as factors to create new columns
+# Remove ID and Zip Code
+
+
+summary(dummyDF)
+names(dummyDF)
+
+# Notes from class session 10.03.21 Personal loan and education are the only ones to convert to factors
+
+dummyDF$CreditCard = as.factor(MyDF$CreditCard)
+dummyDF$Personal.Loan = as.factor(MyDF$Personal.Loan)
+
+```
+
+```{r}
+
+library(caret)
+library(ISLR)
+library(class)
+library(FNN)
+library(dplyr)
+
+set.seed(1000)
+
+# Training and validation of dummyDF
+
+train <- sample(row.names(dummyDF), 0.6*dim(dummyDF)[1])
+validation <- setdiff(row.names(dummyDF),train)
+
+traindf = dummyDF[train,]
+validatedf = dummyDF[validation,]
+
+Constraints = data.frame(Age = 40, Experience = 10, Income = 84, Family = 2, CCAvg = 2, Education1 = 0, Education2 = 1, Education3 = 0, Mortgage = 0, Securities.Account = 0, CD.Account = 0, Online = 1, CreditCard = 1)
+
+Normalisation <- preProcess(traindf[,-c(10)], method = c("center","scale"))
+traindf = predict(Normalisation, traindf)
+validatedf = predict(Normalisation,validatedf)
+Normalisation = predict(Normalisation, Constraints )
+
+knn = knn (train = traindf[,-c(10)],test=Constraints,cl = traindf[,10], k=1 ,prob=TRUE)
+knn.check = attributes(knn)
+knn.check[3]
+
+# That was not fun - I had a lot of difficulties with this part getting to a 1
+
+
+```
+```{r}
+
+# This part is also confusing - I understand what it is doing - it is reading the code that is getting difficult
+
+# This provided the confusion matrix for the training set earlier it will provide the number of false positive and false negative
+
+knnv = knn (train = traindf[,-c(10)],test=validatedf[,-10],cl = traindf[,10], k=1 ,prob=TRUE)
+confusionMatrix(knnv,validatedf[,10])
+
+```
+
+```{r}
+
+# I'm not understanding what is happening here or why this isn't working
+
+# I keep getting an error on this and it won't let me go past this
+
+# deleted first knn try
+
+```
+
+
+
+# Repartition the data, this time into training, validation, and test sets (50% : 30% : 20%). Apply the k-NN method with the k chosen above. Compare the confusion matrix of the test set with that of the training and validation sets. Comment on the differences and their reason.
+
+
+```{r}
+
+
+train2 = sample(row.names(dummyDF), 0.5*dim(dummyDF)[1])
+validate2 = setdiff(row.names(dummyDF),train2,0.3*dim(dummyDF))
+test2 = setdiff(row.names(dummyDF),union((train2, validate2)))
+
+train2df = dummyDF[train2,]
+validate2df = dummyDF[validate2,]
+
+Const2 = data.frame(Age = 40, Experience = 10, Income = 84, Family = 2, CCAvg = 2, Education1 = 0, Education2 = 1, Education3 = 0, Mortgage = 0, Securities.Account = 0, CD.Account = 0, Online = 1, CreditCard = 1)
+
+Normalisation <- preProcess(traindf[,-c(10)], method = c("center","scale"))
+tdf = predict(Normalisation, traindf)
+vdf = predict(Normalisation,validatedf)
+Normalisation = predict(Normalisation, Const2 )
+
+knn = knn (train = traindf[,-c(10)],test=Const2,cl = traindf[,10], k=1 ,prob=TRUE)
+knn.check = attributes(knn)
+knn.check[3]
+
+
+knnv = knn (train2 = traindf[,-c(10)],test2=validatedf[,-10],cl = traindf[,10], k=1 ,prob=TRUE)
+confusionMatrix(knnv,validatedf[,10])
+
+summary(MyDF)
+summary(dummyDF)
+
+```
+
+# I want to see a plot of Education level with Income and another with Personal Loans but separating Education into different columns confuses me on how to visualize that
+
+# I've started some simple visualizations in excel but I'm not being tested in excel so I need to figure out how to do this
+
+# Higher Income earners - those at or above the third quartile $74+ - are also the most users of personal loans
+
+# 93 Education_1 have personal loans
+# 182 Education_2 have personal loans
+# 205 Education_3 have personal loans
+
+# That totals 480 personal loans as described in the assignment
+
+# Using the Income summary to define Low, Mid, and High Low <= $39, Mid <= $98, High >$98 
+
+# Low with personal loans = 0
+# Mid with personal loans = 36
+# High with personal loans = 444
+# Total = 480
+
+# Still not sure how to review three separate columns for education even in excel, that is not something I would have done to analyze data
+
+sumif(dummyDF$Education1)
+sum(dummyDF$Education2)
+sum(dummyDF$Education3)
+
+# I want to sum if - in excel I would write a sumif() function - I'm getting multiple responses in google search that consist of creating another df and getting a sumarize from that, or a cbind function, but it's not quite answering the question
+
+# 93 Education1 with personal loan
+# 182 Education2 with personal loan
+# 205 Education3 with personal loan
+# Total = 480
+
+# not accounting for zero in mortgage the quartiles range min 75, 1st 109, mean 184, 3rd 227, max 635
+
+# Interesting tidbit Mortgage to Personal loan has an interesting thing going on here - if mortgage = zero "None", below the 1st quartile is Low, between 1st and 3rd quartiles Mid, and above 3rd quartile is high
+
+# 315 with no mortgate have loans
+# 15 with low mortgage have loans
+# 50 with Mid mortgate have loans
+# 103 with high mortgage have loans
+
+# So, if I were creating a campaign for getting more people to take a loan, I would look for high earners with no mortgate to improve the personal loan portfolio
+
+# Saving
+
+
+

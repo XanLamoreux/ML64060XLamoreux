@@ -1,0 +1,48 @@
+---
+title: "Assignment2"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+install.packages("class")
+
+```{r}
+Myfile <- read.csv("UniversalBank.csv")
+```
+
+```{r}
+library(dummies)
+library(ISLR)
+
+Myfile$Education = as.factor(Myfile$Education)
+
+dummy = dummy.data.frame(select(Myfile,-c(ZIP.Code,ID)))
+
+dummy$CreditCard = as.factor(Myfile$CreditCard)
+dummy$Personal.Loan = as.factor(Myfile$Personal.Loan)
+dummy
+
+```
+
+```{r}
+set.seed(123)
+
+train.index= sample(row.names(dummy), 0.6*(dummy))
+valid.index=setdiff(row.names(dummy),train.index)
+
+tdf = dummy[train.index]
+vdf = dummy[valid.index]
+
+
+
+```
+

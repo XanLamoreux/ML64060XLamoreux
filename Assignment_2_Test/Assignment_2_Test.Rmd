@@ -93,5 +93,17 @@ library(ISLR)
 
 library(dplyr)
 
+drop_cols <- c('Exp_Group', 'Age_Group')
+df <- df[ , !(names(df) %in% drop_cols)]
+
+summary(df)
+
+# I got rid of the Age_Group and Exp_Group because they didn't seem to follow what I needed to do 
+
+names(dummy_education) <- c("Education_1", "Education_2","Education_3")
+
+library(tidyr)
+
+
 
 
