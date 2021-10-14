@@ -1,0 +1,78 @@
+---
+title: "Assignment_3"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+
+library(readr)
+library(dplyr)
+library(fastDummies)
+library(ggplot2)
+library(caret)
+library(class)
+
+UniversalBank <- read_csv("UniversalBank.csv")
+View(UniversalBank)
+
+head(UniversalBank)
+summary(UniversalBank)
+glimpse(UniversalBank)
+
+UniversalBank$Education <- as.factor(UniversalBank$Education)
+UniversalBank2 <- UniversalBank
+UniversalBank2 <- dummy_cols(UniversalBank2 %>% select(-c(ID,`ZIP Code`,`Personal Loan`)))
+glimpse(UniversalBank2)
+
+UniversalBank2 <- UniversalBank2 %>% 
+  mutate(`Personal Loan`=UniversalBank$`Personal Loan`) %>% select(-c(Education))
+glimpse(UniversalBank2)
+ggplot(UniversalBank, aes(x=`Personal Loan`)) + geom_bar(fill="blue") + 
+  labs(title="Bar Plot for Personal Loan")
+
+ggplot(UniversalBank, aes(x=Mortgage)) + geom_histogram()
+ggplot(UniversalBank, aes(x=`Personal Loan`, y=Income)) + geom_boxplot()
+
+
+# Data partition 60% training 40% testing
+
+set.seed(123)
+index <- createDataPartition(UniversalBank2$`Personal Loan`, p=0.6, list=FALSE)
+
+UniversalBank2_train_df <- UniversalBank2[index,]
+UniversalBank2_test_df <- UniversalBank2[-index,]
+
+glimpse(UniversalBank2_train_df)
+glimpse(UniversalBank2_test_df)
+
+scale_fun <- preProcess(UniversalBank2_train_df[-14], method=c("center","scale"))
+(UniversalBank2_test_norm <- predict(scale_fun, UniversalBank2_train_df[,-14]))
+(UniversalBank2_train_norm <- predict(scale_fun, UniversalBank2_test_df[,-14]))
+
+# knn model start here input variable x and y cl = 
+
+
