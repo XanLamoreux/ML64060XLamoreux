@@ -90,5 +90,6 @@ summary(UniversalBank2_train_df)
     value.factor = FALSE,
     verbose = getOption("datatable.verbose"))
 
+q()
 
 
