@@ -75,4 +75,20 @@ scale_fun <- preProcess(UniversalBank2_train_df[-14], method=c("center","scale")
 
 # knn model start here input variable x and y cl = 
 
+install.packages("pivottabler")
+library(pivottabler)
+
+summary(UniversalBank2_train_df)
+
+? melt
+
+## fast melt a data.table
+## S3 method for class 'data.table'
+## melt(data, id.vars, measure.vars,
+    variable.name = "variable", value.name = "value",
+    ..., na.rm = FALSE, variable.factor = TRUE,
+    value.factor = FALSE,
+    verbose = getOption("datatable.verbose"))
+
+
 
