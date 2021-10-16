@@ -36,6 +36,8 @@ library(ggplot2)
 library(caret)
 library(class)
 
+install.packages("lattice")
+
 UniversalBank <- read_csv("UniversalBank.csv")
 View(UniversalBank)
 
@@ -90,6 +92,87 @@ summary(UniversalBank2_train_df)
     value.factor = FALSE,
     verbose = getOption("datatable.verbose"))
 
-q()
+install.packages("tidyverse")
+library(tidyverse)
+
+library(readxl)
+install.packages("here")
+library(here)
+install.packages("skimr")
+library(skimr)
+
+install.packages("reshape2")
+library(reshape2)
+
+## testing an example that I found to see how this works
+
+country<-data.frame(c("A","B","C"),c(100,200,120),c(2000,7000,15000))
+colnames(country)<- c("countries","population_in_million","gdp_percapita")
+
+##### melt() function in R
+
+country_w_to_L = melt(country, id.vars=c("countries"))
+
+country_w_to_L
+
+###### long to wide using cast function of reshape2() package in R 
+
+country_L_to_W = dcast(country_w_to_L, countries~variable,sum) 
+
+country_L_to_W
+
+### Trying this with universalbank files in my environment
+
+UniversalBank2_train_norm_w_to_L = melt(UniversalBank2_train_norm, id.vars=c("Online","CreditCard"))
+
+UniversalBank2_train_df_w_to_L = melt(UniversalBank2_train_df, id.vars=c("Online","CreditCard","Personal Loan"))
+
+UniversalBank2_train_df_w_to_L
+summary(UniversalBank2_train_df_w_to_L)
+
+## There is something wrong with this
+UniversalBank2_train_df_L_to_W = dcast(UniversalBank2_train_df_w_to_L, UniversalBank2_train_df_w_to_L~variable,count) 
+
+UniversalBank2_train_df_L_to_W
+
+### I'm getting errors
+
+
+# Error: Can't subset columns that don't exist.
+# x Locations 4558, 5568, 5699, 3185, 3461, etc. don't exist.
+# i There are only 14 columns.
+# Run `rlang::last_error()` to see where the error occurred.
+# In addition: Warning message:
+# In xtfrm.data.frame(x) : cannot xtfrm data frames
+# > UniversalBank2_train_df_L_to_W
+# Error: object 'UniversalBank2_train_df_L_to_W' not found
+# > UniversalBank2_train_df_L_to_W = dcast(UniversalBank2_train_df_w_to_L, # UniversalBank2_train_df_w_to_L~variable,count) 
+# Error in `[.data.frame`(x, order(x, na.last = na.last, decreasing = decreasing)) : 
+#   undefined columns selected
+# In addition: Warning message:
+# In xtfrm.data.frame(x) : cannot xtfrm data frames
+
+
+## There is something wrong with this - trying to figure it out
+
+UniversalBank2_train_df_L_to_W = dcast(UniversalBank2_train_df_w_to_L, UniversalBank2_train_df_w_to_L~variable,count) 
+
+UniversalBank2_train_df_L_to_W
+
+UniversalBank2_train_df_L_to_W = dcast(UniversalBank2_train_df_w_to_L, UniversalBank2_train_df~variable,sum)
+
+rlang::last_error()
+rlang::last_trace()
+
+
+# still can't figure this out
+
+UniversalBank2_train_df_L_to_W = dcast(UniversalBank2_train_df_w_to_L, id.vars=c("Online","CreditCard","Personal Loan"))
+
+UniversalBank2_train_df_w_to_L
+summary(UniversalBank2_train_df_w_to_L)
+
+
+
 
 
