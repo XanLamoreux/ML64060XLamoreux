@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.10.2)  16 OCT 2021 13:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.10.16)  16 OCT 2021 13:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **Assignment_3.tex
 (./Assignment_3.tex
 LaTeX2e <2021-06-01> patch level 1
-L3 programming layer <2021-08-27> (c:/Users/xlamo/AppData/Roaming/TinyTeX/texmf
+L3 programming layer <2021-10-12> (c:/Users/xlamo/AppData/Roaming/TinyTeX/texmf
 -dist/tex/latex/base/article.cls
 Document Class: article 2021/02/12 v1.4n Standard LaTeX document class
 (c:/Users/xlamo/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size10.clo
@@ -358,7 +358,7 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
 (c:/Users/xlamo/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fancyvrb/fancyvrb.
 sty
-Package: fancyvrb 2021/08/12 v3.8 verbatim text (tvz,hv)
+Package: fancyvrb 2021/10/15 v3.9 verbatim text (tvz,hv)
 \FV@CodeLineNo=\count281
 \FV@InFile=\read2
 \FV@TabBox=\box52
@@ -395,7 +395,7 @@ Package graphics Info: Driver file: pdftex.def on input line 107.
 )
 (c:/Users/xlamo/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backen
 d-pdftex.def
-File: l3backend-pdftex.def 2021-08-04 L3 backend support: PDF output (pdfTeX)
+File: l3backend-pdftex.def 2021-10-12 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count284
 \l__pdf_internal_box=\box53
 )
@@ -634,8 +634,8 @@ l.364 ...ditCard) table(UniversalBank2_train_df_w_
                                                   to_L\)Online) 
 Here is how much of TeX's memory you used:
  10562 strings out of 480559
- 156533 string characters out of 5901780
- 459914 words of memory out of 5000000
+ 156533 string characters out of 5901779
+ 459935 words of memory out of 5000000
  27960 multiletter control sequences out of 15000+600000
  449352 words of font info for 67 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191

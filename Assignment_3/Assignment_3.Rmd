@@ -225,3 +225,23 @@ UniversalBank2_train_df_L_to_W
 1         33         891         607         619
 2        144         381         248         254
 
+
+### Compute the following quantities [P(A | B) means “the probability ofA given B”]: i. P(CC = 1 | Loan = 1) (the proportion of credit card holders among the loan acceptors) ii. P(Online = 1 | Loan = 1) iii. P(Loan = 1) (the proportion of loan acceptors) iv. P(CC = 1 | Loan = 0) v. P(Online = 1 | Loan = 0) vi. P(Loan = 0)
+
+# output file: Assignment_3.knit.md
+
+# "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS Assignment_3.knit.md --to latex --from markdown+autolink_bare_uris+tex_math_single_backslash --output Assignment_3.tex --lua-filter "C:\Users\xlamo\Documents\R\win-library\4.1\rmarkdown\rmarkdown\lua\pagebreak.lua" --lua-filter "C:\Users\xlamo\Documents\R\win-library\4.1\rmarkdown\rmarkdown\lua\latex-div.lua" --self-contained --highlight-style tango --pdf-engine pdflatex --variable graphics --variable "geometry:margin=1in" 
+# ! Double subscript.
+# l.364 ...ditCard) table(UniversalBank2_train_df_w_
+                                                  to_L\)Online) 
+
+# Error: LaTeX failed to compile Assignment_3.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See Assignment_3.log for more info.
+# Execution halted
+
+##### This was the same problem I kept having with Assignment_2 --- everything kept failing and Execution Halted - this is frustrating
+
+
+
+
+
+
