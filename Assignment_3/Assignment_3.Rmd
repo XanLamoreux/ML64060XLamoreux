@@ -1,8 +1,8 @@
 ---
 title: "Assignment_3"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -227,6 +227,88 @@ UniversalBank2_train_df_L_to_W
 
 
 ### for some reason Knit will not execute for me --- Execution halted. This is the same error I kept getting with assignment 2.
+
+
+
+
+# trying something different this time
+
+UniversalBank2_train_df_L_to_W = dcast(UniversalBank2_train_df_L_to_W, id.vars=c("Online","CreditCard","Personal Loan"))
+
+## That didn't work
+
+View(UniversalBank2_train_df_L_to_W)
+## Looks like a pivot sum with CC as the rows and everything else as columns and Personal Loan is missing - going to create a new df
+
+library(dplyr)
+UB2_train_df_L_to_W <- select(UniversalBank2, CreditCard, 'Personal Loan', Online)
+
+View(UB2_train_df_L_to_W)
+
+### Getting closer - need to create a pivot view of UB2_train_df_Lto_W
+
+library(tidyr)
+
+pivot_wider(UB2_train_df_L_to_W, "Online")
+
+View(UB2_train_df_L_to_W)
+## So I don't think that worked the way I intended - moving on
+
+## There are 143 CC holders who also have personal loans - the proportion of CC holders = 1470 - so, 143/1470
+
+143/1470
+## = 0.0973 or 9.7%
+
+
+### there are 2984 online customers - of which 291 have accepted personal loans so 291/2984
+
+291/2984
+### = 0.0975 or 9.8%
+
+## not much difference between the two
+
+
+# How many people have personal loans?
+sum(UniversalBank$"Personal Loan")
+### = 480
+
+# of 5,000 customers, 480 have loans or 9.6% still not much difference than the above
+
+480/5000
+
+
+# If there are 1470 CC holders and 1327 of them do not have loans, that is 90.3%
+
+1327/1470
+
+# If there are 2984 with online accounts and of those 2693 do not have a loan, that is 90.2$
+
+
+2693/2984
+
+## Proportion of loans to all is 5,000 customers, 480 have loans or 9.6%
+
+480/5000
+
+## Proportion of customers that have a loan and CC + Online is 82 people
+
+## Calculating that should be of the 480 people that have a personal loan only 82 meet this criteria or 17.1% 
+
+### This is actually much higher than 9.6% and the other calculations
+
+82/480
+
+### There are currently 800 customers that have online accounts and credit cards, so this might be a predictor to use for a targeting campaign
+
+install.packages("tidyverse")
+
+library(tidyverse)
+install.packages("caret")
+library(caret)
+install.packages("ggplot2")
+library(ggplot2)
+install.packages("e1071")
+library(e1071)
 
 
 

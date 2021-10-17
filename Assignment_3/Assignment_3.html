@@ -221,8 +221,8 @@ verbose = getOption(&quot;datatable.verbose&quot;))</code></pre>
 <p>library(readxl) install.packages(“here”) library(here) install.packages(“skimr”) library(skimr)</p>
 <p>install.packages(“reshape2”) library(reshape2)</p>
 </div>
-<div id="testing-an-example-that-i-found-to-see-how-this-works" class="section level2">
-<h2>testing an example that I found to see how this works</h2>
+<div id="testing-an-example-that-i-found-online-to-see-how-this-works---this-is-only-an-example-for-me-so-i-can-understand-what-is-happening-and-how-it-should-look.-i-hope-to-be-able-to-learn-how-to-break-this-down-and-apply-it-for-use-in-this-assignment." class="section level2">
+<h2>testing an example that I found online to see how this works —- This is only an example for me so I can understand what is happening and how it should look. I hope to be able to learn how to break this down and apply it for use in this assignment.</h2>
 <p>country&lt;-data.frame(c(“A”,“B”,“C”),c(100,200,120),c(2000,7000,15000)) colnames(country)&lt;- c(“countries”,“population_in_million”,“gdp_percapita”)</p>
 <div id="melt-function-in-r" class="section level5">
 <h5>melt() function in R</h5>
@@ -325,6 +325,71 @@ verbose = getOption(&quot;datatable.verbose&quot;))</code></pre>
 <div id="online-age-experience-income-family-ccavg-mortgage-securities-account-cd-account" class="section level1">
 <h1>## Online Age Experience Income Family CCAvg Mortgage Securities Account CD ##Account</h1>
 <p>1 0 54339 24049 86744 2898 2312.20 64774 125 12 2 1 81947 36568 133443 4299 3459.62 101085 184 165 # Education_1 Education_2 Education_3 1 526 321 354 2 746 534 519 #### &gt; UniversalBank2_train_df_L_to_W = #### #####dcast(UniversalBank2_train_df_w_to_L,Online~variable, sum) ##### &gt; UniversalBank2_train_df_L_to_W #### Online Age Experience Income Family CCAvg Mortgage Securities Account CD Account 1 0 54339 24049 86744 2898 2312.20 64774 125 12 2 1 81947 36568 133443 4299 3459.62 101085 184 165 Education_1 Education_2 Education_3 1 526 321 354 2 746 534 519 # &gt; UniversalBank2_train_df_L_to_W = dcast(UniversalBank2_train_df_w_to_L,Personal Loan~variable, sum) # Error: unexpected symbol in “UniversalBank2_train_df_L_to_W = dcast(UniversalBank2_train_df_w_to_L,Personal Loan” # &gt; UniversalBank2_train_df_L_to_W = dcast(UniversalBank2_train_df_w_to_L,CreditCard~variable, sum) # &gt; UniversalBank2_train_df_L_to_W CreditCard Age Experience Income Family CCAvg Mortgage Securities Account 1 0 95969 42547 153620 5098 4049.85 116296 231 2 1 40317 18070 66567 2099 1721.97 49563 78 CD Account Education_1 Education_2 Education_3 1 33 891 607 619 2 144 381 248 254</p>
+<div id="for-some-reason-knit-will-not-execute-for-me-execution-halted.-this-is-the-same-error-i-kept-getting-with-assignment-2." class="section level3">
+<h3>for some reason Knit will not execute for me — Execution halted. This is the same error I kept getting with assignment 2.</h3>
+</div>
+</div>
+<div id="trying-something-different-this-time" class="section level1">
+<h1>trying something different this time</h1>
+<p>UniversalBank2_train_df_L_to_W = dcast(UniversalBank2_train_df_L_to_W, id.vars=c(“Online”,“CreditCard”,“Personal Loan”))</p>
+<div id="that-didnt-work" class="section level2">
+<h2>That didn’t work</h2>
+<p>View(UniversalBank2_train_df_L_to_W) ## Looks like a pivot sum with CC as the rows and everything else as columns and Personal Loan is missing - going to create a new df</p>
+<p>library(dplyr) UB2_train_df_L_to_W &lt;- select(UniversalBank2, CreditCard, ‘Personal Loan’, Online)</p>
+<p>View(UB2_train_df_L_to_W)</p>
+<div id="getting-closer---need-to-create-a-pivot-view-of-ub2_train_df_lto_w" class="section level3">
+<h3>Getting closer - need to create a pivot view of UB2_train_df_Lto_W</h3>
+<p>library(tidyr)</p>
+<p>pivot_wider(UB2_train_df_L_to_W, “Online”)</p>
+<p>View(UB2_train_df_L_to_W) ## So I don’t think that worked the way I intended - moving on</p>
+</div>
+</div>
+<div id="there-are-143-cc-holders-who-also-have-personal-loans---the-proportion-of-cc-holders-1470---so-1431470" class="section level2">
+<h2>There are 143 CC holders who also have personal loans - the proportion of CC holders = 1470 - so, 143/1470</h2>
+<p>143/1470 ## = 0.0973 or 9.7%</p>
+<div id="there-are-2984-online-customers---of-which-291-have-accepted-personal-loans-so-2912984" class="section level3">
+<h3>there are 2984 online customers - of which 291 have accepted personal loans so 291/2984</h3>
+<p>291/2984 ### = 0.0975 or 9.8%</p>
+</div>
+</div>
+<div id="not-much-difference-between-the-two" class="section level2">
+<h2>not much difference between the two</h2>
+</div>
+</div>
+<div id="how-many-people-have-personal-loans" class="section level1">
+<h1>How many people have personal loans?</h1>
+<p>sum(UniversalBank$“Personal Loan”) ### = 480</p>
+</div>
+<div id="of-5000-customers-480-have-loans-or-9.6-still-not-much-difference-than-the-above" class="section level1">
+<h1>of 5,000 customers, 480 have loans or 9.6% still not much difference than the above</h1>
+<p>480/5000</p>
+</div>
+<div id="if-there-are-1470-cc-holders-and-1327-of-them-do-not-have-loans-that-is-90.3" class="section level1">
+<h1>If there are 1470 CC holders and 1327 of them do not have loans, that is 90.3%</h1>
+<p>1327/1470</p>
+</div>
+<div id="if-there-are-2984-with-online-accounts-and-of-those-2693-do-not-have-a-loan-that-is-90.2" class="section level1">
+<h1>If there are 2984 with online accounts and of those 2693 do not have a loan, that is 90.2$</h1>
+<p>2693/2984</p>
+<div id="proportion-of-loans-to-all-is-5000-customers-480-have-loans-or-9.6" class="section level2">
+<h2>Proportion of loans to all is 5,000 customers, 480 have loans or 9.6%</h2>
+<p>480/5000</p>
+</div>
+<div id="proportion-of-customers-that-have-a-loan-and-cc-online-is-82-people" class="section level2">
+<h2>Proportion of customers that have a loan and CC + Online is 82 people</h2>
+</div>
+<div id="calculating-that-should-be-of-the-480-people-that-have-a-personal-loan-only-82-meet-this-criteria-or-17.1" class="section level2">
+<h2>Calculating that should be of the 480 people that have a personal loan only 82 meet this criteria or 17.1%</h2>
+<div id="this-is-actually-much-higher-than-9.6-and-the-other-calculations" class="section level3">
+<h3>This is actually much higher than 9.6% and the other calculations</h3>
+<p>82/480</p>
+</div>
+<div id="there-are-currently-800-customers-that-have-online-accounts-and-credit-cards-so-this-might-be-a-predictor-to-use-for-a-targeting-campaign" class="section level3">
+<h3>There are currently 800 customers that have online accounts and credit cards, so this might be a predictor to use for a targeting campaign</h3>
+<p>install.packages(“tidyverse”)</p>
+<p>library(tidyverse) install.packages(“caret”) library(caret) install.packages(“ggplot2”) library(ggplot2) install.packages(“e1071”) library(e1071)</p>
+</div>
+</div>
 </div>
 
 
