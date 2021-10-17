@@ -149,10 +149,8 @@ chunk to prevent printing of the R code that generated the plot.
 library(readr) library(dplyr) library(fastDummies) library(ggplot2)
 library(caret) library(class)
 
-install.packages(``lattice'')
-
-UniversalBank \textless- read\_csv(``UniversalBank.csv'')
-View(UniversalBank)
+install.packages(``lattice'') library(lattice) UniversalBank \textless-
+read\_csv(``UniversalBank.csv'') View(UniversalBank)
 
 head(UniversalBank) summary(UniversalBank) glimpse(UniversalBank)
 
@@ -226,9 +224,12 @@ install.packages(``skimr'') library(skimr)
 
 install.packages(``reshape2'') library(reshape2)
 
-\hypertarget{testing-an-example-that-i-found-to-see-how-this-works}{%
-\subsection{testing an example that I found to see how this
-works}\label{testing-an-example-that-i-found-to-see-how-this-works}}
+\hypertarget{testing-an-example-that-i-found-online-to-see-how-this-works---this-is-only-an-example-for-me-so-i-can-understand-what-is-happening-and-how-it-should-look.-i-hope-to-be-able-to-learn-how-to-break-this-down-and-apply-it-for-use-in-this-assignment.}{%
+\subsection{testing an example that I found online to see how this works
+---- This is only an example for me so I can understand what is
+happening and how it should look. I hope to be able to learn how to
+break this down and apply it for use in this
+assignment.}\label{testing-an-example-that-i-found-online-to-see-how-this-works---this-is-only-an-example-for-me-so-i-can-understand-what-is-happening-and-how-it-should-look.-i-hope-to-be-able-to-learn-how-to-break-this-down-and-apply-it-for-use-in-this-assignment.}}
 
 country\textless-data.frame(c(``A'',``B'',``C''),c(100,200,120),c(2000,7000,15000))
 colnames(country)\textless-
@@ -275,57 +276,58 @@ UniversalBank2\_train\_df\_L\_to\_W
 \subsubsection{I'm getting errors}\label{im-getting-errors}}
 
 \hypertarget{error-cant-subset-columns-that-dont-exist.}{%
-\section{Error: Can't subset columns that don't
+\paragraph{Error: Can't subset columns that don't
 exist.}\label{error-cant-subset-columns-that-dont-exist.}}
 
 \hypertarget{x-locations-4558-5568-5699-3185-3461-etc.-dont-exist.}{%
-\section{x Locations 4558, 5568, 5699, 3185, 3461, etc. don't
+\paragraph{x Locations 4558, 5568, 5699, 3185, 3461, etc. don't
 exist.}\label{x-locations-4558-5568-5699-3185-3461-etc.-dont-exist.}}
 
 \hypertarget{i-there-are-only-14-columns.}{%
-\section{i There are only 14
+\paragraph{i There are only 14
 columns.}\label{i-there-are-only-14-columns.}}
 
 \hypertarget{run-rlanglast_error-to-see-where-the-error-occurred.}{%
-\section{\texorpdfstring{Run \texttt{rlang::last\_error()} to see where
-the error
+\paragraph{\texorpdfstring{Run \texttt{rlang::last\_error()} to see
+where the error
 occurred.}{Run rlang::last\_error() to see where the error occurred.}}\label{run-rlanglast_error-to-see-where-the-error-occurred.}}
 
 \hypertarget{in-addition-warning-message}{%
-\section{In addition: Warning
+\paragraph{In addition: Warning
 message:}\label{in-addition-warning-message}}
 
 \hypertarget{in-xtfrm.data.framex-cannot-xtfrm-data-frames}{%
-\section{In xtfrm.data.frame(x) : cannot xtfrm data
+\paragraph{In xtfrm.data.frame(x) : cannot xtfrm data
 frames}\label{in-xtfrm.data.framex-cannot-xtfrm-data-frames}}
 
 \hypertarget{universalbank2_train_df_l_to_w}{%
-\section{\textgreater{}
+\paragraph{\textgreater{}
 UniversalBank2\_train\_df\_L\_to\_W}\label{universalbank2_train_df_l_to_w}}
 
 \hypertarget{error-object-universalbank2_train_df_l_to_w-not-found}{%
-\section{Error: object `UniversalBank2\_train\_df\_L\_to\_W' not
+\paragraph{Error: object `UniversalBank2\_train\_df\_L\_to\_W' not
 found}\label{error-object-universalbank2_train_df_l_to_w-not-found}}
 
 \hypertarget{universalbank2_train_df_l_to_w-dcastuniversalbank2_train_df_w_to_l-universalbank2_train_df_w_to_lvariablecount}{%
-\section{\textgreater{} UniversalBank2\_train\_df\_L\_to\_W =
+\paragraph{\textgreater{} UniversalBank2\_train\_df\_L\_to\_W =
 dcast(UniversalBank2\_train\_df\_w\_to\_L, \#
-UniversalBank2\_train\_df\_w\_to\_L\textasciitilde variable,count)}\label{universalbank2_train_df_l_to_w-dcastuniversalbank2_train_df_w_to_l-universalbank2_train_df_w_to_lvariablecount}}
+\#\#\#UniversalBank2\_train\_df\_w\_to\_L\textasciitilde variable,count)}\label{universalbank2_train_df_l_to_w-dcastuniversalbank2_train_df_w_to_l-universalbank2_train_df_w_to_lvariablecount}}
 
 \hypertarget{error-in-.data.framex-orderx-na.last-na.last-decreasing-decreasing}{%
-\section{\texorpdfstring{Error in \texttt{{[}.data.frame}(x, order(x,
-na.last = na.last, decreasing = decreasing))
-:}{Error in {[}.data.frame(x, order(x, na.last = na.last, decreasing = decreasing)) :}}\label{error-in-.data.framex-orderx-na.last-na.last-decreasing-decreasing}}
+\paragraph{\texorpdfstring{Error in \texttt{{[}.data.frame}(x, order(x,
+na.last = na.last, decreasing = \#\#\#decreasing))
+:}{Error in {[}.data.frame(x, order(x, na.last = na.last, decreasing = \#\#\#decreasing)) :}}\label{error-in-.data.framex-orderx-na.last-na.last-decreasing-decreasing}}
 
 \hypertarget{undefined-columns-selected}{%
-\section{undefined columns selected}\label{undefined-columns-selected}}
+\subparagraph{undefined columns
+selected}\label{undefined-columns-selected}}
 
 \hypertarget{in-addition-warning-message-1}{%
-\section{In addition: Warning
+\paragraph{In addition: Warning
 message:}\label{in-addition-warning-message-1}}
 
 \hypertarget{in-xtfrm.data.framex-cannot-xtfrm-data-frames-1}{%
-\section{In xtfrm.data.frame(x) : cannot xtfrm data
+\paragraph{In xtfrm.data.frame(x) : cannot xtfrm data
 frames}\label{in-xtfrm.data.framex-cannot-xtfrm-data-frames-1}}
 
 \hypertarget{there-is-something-wrong-with-this---trying-to-figure-it-out}{%
@@ -379,38 +381,38 @@ can do pivots in excel but R is just a
 pain}\label{something-started-working-but-count-is-giving-me-grief---i-can-do-pivots-in-excel-but-r-is-just-a-pain}}
 
 \hypertarget{universalbank2_train_df_l_to_w-dcastuniversalbank2_train_df_w_to_lonlinevariable-count}{%
-\section{\textgreater{} UniversalBank2\_train\_df\_L\_to\_W =
-dcast(UniversalBank2\_train\_df\_w\_to\_L,Online\textasciitilde variable,
+\subsubsection{\textgreater{} UniversalBank2\_train\_df\_L\_to\_W =
+\#\#dcast(UniversalBank2\_train\_df\_w\_to\_L,Online\textasciitilde variable,
 count)}\label{universalbank2_train_df_l_to_w-dcastuniversalbank2_train_df_w_to_lonlinevariable-count}}
 
 \hypertarget{error-in-usemethodcount}{%
-\section{Error in UseMethod(``count'')
+\subsubsection{Error in UseMethod(``count'')
 :}\label{error-in-usemethodcount}}
 
 \hypertarget{no-applicable-method-for-count-applied-to-an-object-of-class-cdouble-numeric}{%
-\section{no applicable method for `count' applied to an object of class
-``c(`double',
+\subsubsection{no applicable method for `count' applied to an object of
+class ``c(`double', \#\# \#\#\#\#\#\#\#\#\#
 `numeric')''}\label{no-applicable-method-for-count-applied-to-an-object-of-class-cdouble-numeric}}
 
 \hypertarget{universalbank2_train_df_l_to_w-1}{%
-\section{\textgreater{}
+\subsubsection{\textgreater{}
 UniversalBank2\_train\_df\_L\_to\_W}\label{universalbank2_train_df_l_to_w-1}}
 
 \hypertarget{online-age-experience-income-family-ccavg-mortgage-securities-account-cd-account}{%
-\section{Online Age Experience Income Family CCAvg Mortgage Securities
-Account CD
-Account}\label{online-age-experience-income-family-ccavg-mortgage-securities-account-cd-account}}
+\section{\#\# Online Age Experience Income Family CCAvg Mortgage
+Securities Account CD
+\#\#Account}\label{online-age-experience-income-family-ccavg-mortgage-securities-account-cd-account}}
 
 1 0 54339 24049 86744 2898 2312.20 64774 125 12 2 1 81947 36568 133443
 4299 3459.62 101085 184 165 \# Education\_1 Education\_2 Education\_3 1
-526 321 354 2 746 534 519 \#\textgreater{}
-UniversalBank2\_train\_df\_L\_to\_W =
-dcast(UniversalBank2\_train\_df\_w\_to\_L,Online\textasciitilde variable,
-sum) \#\textgreater{} UniversalBank2\_train\_df\_L\_to\_W Online Age
-Experience Income Family CCAvg Mortgage Securities Account CD Account 1
-0 54339 24049 86744 2898 2312.20 64774 125 12 2 1 81947 36568 133443
-4299 3459.62 101085 184 165 Education\_1 Education\_2 Education\_3 1 526
-321 354 2 746 534 519 \# \textgreater{}
+526 321 354 2 746 534 519 \#\#\#\# \textgreater{}
+UniversalBank2\_train\_df\_L\_to\_W = \#\#\#\#
+\#\#\#\#\#dcast(UniversalBank2\_train\_df\_w\_to\_L,Online\textasciitilde variable,
+sum) \#\#\#\#\# \textgreater{} UniversalBank2\_train\_df\_L\_to\_W
+\#\#\#\# Online Age Experience Income Family CCAvg Mortgage Securities
+Account CD Account 1 0 54339 24049 86744 2898 2312.20 64774 125 12 2 1
+81947 36568 133443 4299 3459.62 101085 184 165 Education\_1 Education\_2
+Education\_3 1 526 321 354 2 746 534 519 \# \textgreater{}
 UniversalBank2\_train\_df\_L\_to\_W =
 dcast(UniversalBank2\_train\_df\_w\_to\_L,Personal
 Loan\textasciitilde variable, sum) \# Error: unexpected symbol in
@@ -423,55 +425,5 @@ Age Experience Income Family CCAvg Mortgage Securities Account 1 0 95969
 42547 153620 5098 4049.85 116296 231 2 1 40317 18070 66567 2099 1721.97
 49563 78 CD Account Education\_1 Education\_2 Education\_3 1 33 891 607
 619 2 144 381 248 254
-
-\hypertarget{compute-the-following-quantities-pa-b-means-the-probability-ofa-given-b-i.-pcc-1-loan-1-the-proportion-of-credit-card-holders-among-the-loan-acceptors-ii.-ponline-1-loan-1-iii.-ploan-1-the-proportion-of-loan-acceptors-iv.-pcc-1-loan-0-v.-ponline-1-loan-0-vi.-ploan-0}{%
-\subsubsection{Compute the following quantities {[}P(A \textbar{} B)
-means ``the probability ofA given B''{]}: i. P(CC = 1 \textbar{} Loan =
-1) (the proportion of credit card holders among the loan acceptors) ii.
-P(Online = 1 \textbar{} Loan = 1) iii. P(Loan = 1) (the proportion of
-loan acceptors) iv. P(CC = 1 \textbar{} Loan = 0) v. P(Online = 1
-\textbar{} Loan = 0) vi. P(Loan =
-0)}\label{compute-the-following-quantities-pa-b-means-the-probability-ofa-given-b-i.-pcc-1-loan-1-the-proportion-of-credit-card-holders-among-the-loan-acceptors-ii.-ponline-1-loan-1-iii.-ploan-1-the-proportion-of-loan-acceptors-iv.-pcc-1-loan-0-v.-ponline-1-loan-0-vi.-ploan-0}}
-
-\hypertarget{output-file-assignment_3.knit.md}{%
-\section{output file:
-Assignment\_3.knit.md}\label{output-file-assignment_3.knit.md}}
-
-\hypertarget{cprogram-filesrstudiobinpandocpandoc-rts--k512m--rts-assignment_3.knit.md-to-latex-from-markdownautolink_bare_uristex_math_single_backslash-output-assignment_3.tex-lua-filter-c-library4.1.lua-lua-filter-c-library4.1-div.lua-self-contained-highlight-style-tango-pdf-engine-pdflatex-variable-graphics-variable-geometrymargin1in}{%
-\section{\texorpdfstring{``C:/Program Files/RStudio/bin/pandoc/pandoc''
-+RTS -K512m -RTS Assignment\_3.knit.md --to latex --from
-markdown+autolink\_bare\_uris+tex\_math\_single\_backslash --output
-Assignment\_3.tex --lua-filter
-``C:\Users\xlamo\Documents\R\win-library\textbackslash4.1\rmarkdown\rmarkdown\lua\pagebreak.lua''
---lua-filter
-``C:\Users\xlamo\Documents\R\win-library\textbackslash4.1\rmarkdown\rmarkdown\lua\latex-div.lua''
---self-contained --highlight-style tango --pdf-engine pdflatex
---variable graphics --variable
-``geometry:margin=1in''}{``C:/Program Files/RStudio/bin/pandoc/pandoc'' +RTS -K512m -RTS Assignment\_3.knit.md --to latex --from markdown+autolink\_bare\_uris+tex\_math\_single\_backslash --output Assignment\_3.tex --lua-filter ``C:-library\textbackslash4.1.lua'' --lua-filter ``C:-library\textbackslash4.1-div.lua'' --self-contained --highlight-style tango --pdf-engine pdflatex --variable graphics --variable ``geometry:margin=1in''}}\label{cprogram-filesrstudiobinpandocpandoc-rts--k512m--rts-assignment_3.knit.md-to-latex-from-markdownautolink_bare_uristex_math_single_backslash-output-assignment_3.tex-lua-filter-c-library4.1.lua-lua-filter-c-library4.1-div.lua-self-contained-highlight-style-tango-pdf-engine-pdflatex-variable-graphics-variable-geometrymargin1in}}
-
-\hypertarget{double-subscript.}{%
-\section{! Double subscript.}\label{double-subscript.}}
-
-\hypertarget{l.364-ditcard-tableuniversalbank2_train_df_w_}{%
-\section{l.364 \ldots ditCard)
-table(UniversalBank2\_train\_df\_w\_}\label{l.364-ditcard-tableuniversalbank2_train_df_w_}}
-
-\begin{verbatim}
-                                              to_L\)Online) 
-\end{verbatim}
-
-\hypertarget{error-latex-failed-to-compile-assignment_3.tex.-see-httpsyihui.orgtinytexrdebugging-for-debugging-tips.-see-assignment_3.log-for-more-info.}{%
-\section{\texorpdfstring{Error: LaTeX failed to compile
-Assignment\_3.tex. See \url{https://yihui.org/tinytex/r/\#debugging} for
-debugging tips. See Assignment\_3.log for more
-info.}{Error: LaTeX failed to compile Assignment\_3.tex. See https://yihui.org/tinytex/r/\#debugging for debugging tips. See Assignment\_3.log for more info.}}\label{error-latex-failed-to-compile-assignment_3.tex.-see-httpsyihui.orgtinytexrdebugging-for-debugging-tips.-see-assignment_3.log-for-more-info.}}
-
-\hypertarget{execution-halted}{%
-\section{Execution halted}\label{execution-halted}}
-
-\hypertarget{this-was-the-same-problem-i-kept-having-with-assignment_2-everything-kept-failing-and-execution-halted---this-is-frustrating}{%
-\subparagraph{This was the same problem I kept having with Assignment\_2
---- everything kept failing and Execution Halted - this is
-frustrating}\label{this-was-the-same-problem-i-kept-having-with-assignment_2-everything-kept-failing-and-execution-halted---this-is-frustrating}}
 
 \end{document}

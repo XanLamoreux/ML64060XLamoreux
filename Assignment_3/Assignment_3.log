@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.10.16)  16 OCT 2021 13:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.10.16)  17 OCT 2021 11:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -545,100 +545,106 @@ n input line 144.
 
 {c:/Users/xlamo/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdfte
 x.map}]
-Underfull \hbox (badness 5519) in paragraph at lines 159--164
+Overfull \hbox (23.98871pt too wide) in paragraph at lines 152--154
+[]\T1/lmr/m/n/10 install.packages(``lattice'') li-brary(lattice) Uni-ver-sal-Ba
+nk <- read_csv(``UniversalBank.csv'') View(UniversalBank) 
+ []
+
+
+Underfull \hbox (badness 5519) in paragraph at lines 157--162
 []\T1/lmr/m/n/10 UniversalBank$\OML/lmm/m/it/10 Education < \OMS/lmsy/m/n/10 ^^
 @\OML/lmm/m/it/10 as:factor\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 UniversalBank$\T1/
 lmr/m/n/10 Education) Uni-ver-sal-Bank2 <- Uni-ver-sal-
  []
 
 
-Underfull \hbox (badness 1072) in paragraph at lines 159--164
+Underfull \hbox (badness 1072) in paragraph at lines 157--162
 \T1/lmr/m/n/10 Bank Uni-ver-sal-Bank2 <- dummy_cols(UniversalBank2 %>% select(-
 c(ID,\T1/lmtt/m/n/10 ZIP Code\T1/lmr/m/n/10 ,\T1/lmtt/m/n/10 Personal Loan\T1/l
 mr/m/n/10 )))
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 165--170
+Underfull \hbox (badness 10000) in paragraph at lines 163--168
 []\T1/lmr/m/n/10 UniversalBank2 <- Uni-ver-sal-Bank2 %>% mu-tate(\T1/lmtt/m/n/1
 0 Personal Loan\T1/lmr/m/n/10 =UniversalBank$\T1/lmtt/m/n/10 Personal Loan\T1/l
 mr/m/n/10 )
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 188--193
+Underfull \hbox (badness 10000) in paragraph at lines 186--191
 []\T1/lmr/m/n/10 scale_fun <- preProcess(UniversalBank2_train_df[-14], method=c
 (``center'',``scale'')) (Uni-ver-sal-
  []
 
 [2 <./Assignment_3_files/figure-latex/pressure-1.pdf>]
-Overfull \hbox (194.77452pt too wide) in paragraph at lines 233--236
+Overfull \hbox (194.77452pt too wide) in paragraph at lines 234--237
 \T1/lmr/m/n/10 country<-data.frame(c(``A'',``B'',``C''),c(100,200,120),c(2000,7
 000,15000)) colnames(country)<- c(``countries'',``population_in_million'',``gdp
 _percapita'') 
  []
 
 
-Overfull \hbox (24.0681pt too wide) in paragraph at lines 255--257
+Overfull \hbox (24.0681pt too wide) in paragraph at lines 256--258
 \T1/lmr/m/n/10 UniversalBank2_train_norm_w_to_L = melt(UniversalBank2_train_nor
 m, id.vars=c(``Online'',``CreditCard'')) 
  []
 
 
-Overfull \hbox (32.56613pt too wide) in paragraph at lines 258--260
+Overfull \hbox (32.56613pt too wide) in paragraph at lines 259--261
 []\T1/lmr/m/n/10 UniversalBank2_train_df_w_to_L = melt(UniversalBank2_train_df,
  id.vars=c(``Online'',``CreditCard'',``Personal
  []
 
 
-Overfull \hbox (123.16116pt too wide) in paragraph at lines 268--271
+Overfull \hbox (123.16116pt too wide) in paragraph at lines 269--272
 \T1/lmr/m/n/10 UniversalBank2_train_df_L_to_W = dcast(UniversalBank2_train_df_w
 _to_L, Uni-ver-sal-Bank2_train_df_w_to_L~variable,count) 
  []
 
 [3]
-LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 292.
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 297.
 
-Overfull \hbox (133.32805pt too wide) in paragraph at lines 313--313
-[][]\T1/lmr/bx/n/14.4 > Uni-ver-sal-Bank2_train_df_L_to_W = dcast(UniversalBank
-2_train_df_w_to_L,
+Underfull \hbox (badness 3148) in paragraph at lines 319--319
+ []\T1/lmr/bx/n/10 > Uni-ver-sal-Bank2_train_df_L_to_W = dcast(UniversalBank2_t
+rain_df_w_to_L, #
  []
 
 
-Overfull \hbox (123.16116pt too wide) in paragraph at lines 335--338
+Overfull \hbox (123.16116pt too wide) in paragraph at lines 337--340
 \T1/lmr/m/n/10 UniversalBank2_train_df_L_to_W = dcast(UniversalBank2_train_df_w
 _to_L, Uni-ver-sal-Bank2_train_df_w_to_L~variable,count) 
  []
 
 
-Overfull \hbox (71.96642pt too wide) in paragraph at lines 341--344
+Overfull \hbox (71.96642pt too wide) in paragraph at lines 343--346
 []\T1/lmr/m/n/10 UniversalBank2_train_df_L_to_W = dcast(UniversalBank2_train_df
 _w_to_L, Uni-ver-sal-Bank2_train_df~variable,sum) 
  []
 
 
-Overfull \hbox (83.65013pt too wide) in paragraph at lines 350--353
+Overfull \hbox (83.65013pt too wide) in paragraph at lines 352--355
 \T1/lmr/m/n/10 UniversalBank2_train_df_L_to_W = dcast(UniversalBank2_train_df_w
 _to_L, id.vars=c(``Online'',``CreditCard'',``Personal
  []
 
 [4]
-Overfull \hbox (92.49432pt too wide) in paragraph at lines 357--360
+Overfull \hbox (92.49432pt too wide) in paragraph at lines 359--362
 []\T1/lmr/m/n/10 UniversalBank2_train_df_L_to_W = dcast(UniversalBank2_train_df
 _w_to_L, Uni-ver-sal-Bank2_train_norm~variable,count) 
  []
 
 ! Double subscript.
-l.364 ...ditCard) table(UniversalBank2_train_df_w_
+l.366 ...ditCard) table(UniversalBank2_train_df_w_
                                                   to_L\)Online) 
 Here is how much of TeX's memory you used:
  10562 strings out of 480559
- 156533 string characters out of 5901779
- 459935 words of memory out of 5000000
+ 156722 string characters out of 5901779
+ 459097 words of memory out of 5000000
  27960 multiletter control sequences out of 15000+600000
  449352 words of font info for 67 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,6n,66p,246b,326s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,6n,66p,314b,326s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 !  ==> Fatal error occurred, no output PDF file produced!

@@ -1,8 +1,8 @@
 ---
 title: "Assignment_3"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -106,7 +106,7 @@ library(skimr)
 install.packages("reshape2")
 library(reshape2)
 
-## testing an example that I found to see how this works
+## testing an example that I found online to see how this works ---- This is only an example for me so I can understand what is happening and how it should look. I hope to be able to learn how to break this down and apply it for use in this assignment.
 
 country<-data.frame(c("A","B","C"),c(100,200,120),c(2000,7000,15000))
 colnames(country)<- c("countries","population_in_million","gdp_percapita")
@@ -226,7 +226,7 @@ UniversalBank2_train_df_L_to_W
 2        144         381         248         254
 
 
-
+### for some reason Knit will not execute for me --- Execution halted. This is the same error I kept getting with assignment 2.
 
 
 
