@@ -310,5 +310,8 @@ library(ggplot2)
 install.packages("e1071")
 library(e1071)
 
+# I need to create objects x which holds the predictor variables and y which holds the response variables and use them to build a model but I'm stuck
+
+
 
 
