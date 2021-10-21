@@ -312,6 +312,6 @@ library(e1071)
 
 # I need to create objects x which holds the predictor variables and y which holds the response variables and use them to build a model but I'm stuck
 
-
+# knn model start here input variable x and y cl = 
 
 
