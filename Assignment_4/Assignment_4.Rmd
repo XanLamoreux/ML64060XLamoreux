@@ -132,7 +132,6 @@ View(Pharma %>% pivot_wider(names_from=Median_Recommendation,values_from=Locatio
 
 
 
-q()
 
 
 
