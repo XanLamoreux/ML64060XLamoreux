@@ -29,22 +29,110 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
 
 install.packages("caret")
 library(caret)
+install.packages("dplyr")
+library(dplyr)
+install.packages("tidyverse")
+library(tidyverse)
+install.packages("cluster")
+library(cluster)
+install.packages("factoextra")
+library(factoextra)
 Pharmaceuticals <- read_csv("Pharmaceuticals.csv")
+
+
+## using a shorter name "Pharma"
 
 Pharma <- read_csv("Pharmaceuticals.csv")
 head(Pharma)
 summary(Pharma)
 colnames(Pharma)
 
+is.na(Pharma)
+
+glimpse(Pharma)
+
+apply(Pharma,2,function(x){any(is.na(x))})
+Pharma_3to11 <- Pharma %>% select_if(is.numeric)
+Pharma_3to11
+
+# setting scaling 
+# setting a seed can be a random number that helps to form consistency when running the data so each time you run it you won't get a new view
+
+set.seed(22)
+scale_data <- as.data.frame(scale(Pharma_3to11))
+
+
+### can use the fviz_nbclust to "Dertemine and visualize the optimal number of clusters using different methods: within cluster sums of squares, average silhouette and gap statistics" https://www.rdocumentation.org/packages/factoextra/versions/1.0.7/topics/fviz_nbclust
+
+
+### K-means clustering - Elbow is one of the most famous methods by which you can select the right value of k and boost your model performance.It is an empirical method to find out the best value of k. it picks up the range of values and takes the best among them. It calculates the sum of the square of the points and calculates the average distance.Plot a graph between k-values and the within-cluster sum of the square to get the k value. we will examine the graph carefully. At some point, our graph will decrease abruptly. That point will be considered as a value of k.
+
+## The silhouette method calculates the silhouette coefficient of every point. It calculates the average distance of points within its cluster a (i) and the average distance of the points to its next closest cluster called b (i).
+
+# https://www.analyticsvidhya.com/blog/2020/10/a-simple-explanation-of-k-means-clustering/
+
+
+wss <- fviz_nbclust(scale_data,FUNcluster=kmeans,method="wss")
+plot(wss)
+
+sil <- fviz_nbclust(scale_data,FUNcluster=kmeans,method="silhouette")
+plot(sil)
+
+
+install.packages("cowplot")
+library(cowplot)
+
+plot_grid(wss,sil)
+
+
+
+
+model_k3 <- kmeans(scale_data,centers=3,nstart=25)
+model_k3
+
+plot_k3 <- fviz_cluster(model_k3,data=scale_data,main="plot for k3")
+plot_k3
+
+model_k5 <- kmeans(scale_data,centers=5,nstart=25)
+model_k5
+
+plot_k5 <- fviz_cluster(model_k5,data=scale_data,main="plot for k5")
+plot_k5
+
+Pharma_3to14 <- Pharma %>% select(c("Median_Recommendation", "Location", "Exchange")) %>% mutate(cluster=model_k3$cluster)
+Pharma_3to14
+
+library(ggplot2)
+
+ggplot(Pharma_3to14,aes(fill=Median_Recommendation,x=as.factor(cluster)))+geom_bar()
+ggplot(Pharma_3to14,aes(fill=Location,x=as.factor(cluster)))+geom_bar()
+ggplot(Pharma_3to14,aes(fill=Exchange,x=as.factor(cluster)))+geom_bar()
+
+
+
+Pharma_3to14 <- Pharma %>% select(c("Median_Recommendation", "Location", "Exchange")) %>% mutate(cluster=model_k5$cluster)
+Pharma_3to14
+
+
+ggplot(Pharma_3to14,aes(fill=Median_Recommendation,x=as.factor(cluster)))+geom_bar()
+ggplot(Pharma_3to14,aes(fill=Location,x=as.factor(cluster)))+geom_bar()
+ggplot(Pharma_3to14,aes(fill=Exchange,x=as.factor(cluster)))+geom_bar()
+
+
+
+
+library(tidyverse)
+Pharma %>% pivot_longer(c("Location", "Exchange"),names_to="names",values_to="values")
+View(Pharma %>% pivot_longer(c("Location", "Exchange"),names_to="names",values_to="values"))
+
+View(Pharma %>% pivot_wider(names_from=Median_Recommendation,values_from=Location))
 
 
 
 
 
 
-
-
-
+q()
 
 
 
