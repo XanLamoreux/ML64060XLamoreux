@@ -127,7 +127,7 @@ ggplot(Pharma_3to14,aes(fill=Location,x=as.factor(cluster)))+geom_bar()
 ggplot(Pharma_3to14,aes(fill=Exchange,x=as.factor(cluster)))+geom_bar()
 
 
-
+## I believe that the 5 clusters provide a clearer indication of appropriate clusters. I do not think that the Exhange is a good indicator for grouping because almost all stocks are on the NYSE. I do believe that cluster group 4 has the most diversity by country of origin and also has the most volitility in the recommendations. Group 4 also is the only group that has anything with a strong buy rating. It appears that group 4 has the most activity.
 
 
 
