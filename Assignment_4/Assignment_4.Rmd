@@ -82,10 +82,12 @@ plot(sil)
 install.packages("cowplot")
 library(cowplot)
 
+## view side by side to compare the two optimal plots
+
 plot_grid(wss,sil)
 
 
-
+## testing 3 clusters and 5 clusters to see what makes sense
 
 model_k3 <- kmeans(scale_data,centers=3,nstart=25)
 model_k3
@@ -99,15 +101,21 @@ model_k5
 plot_k5 <- fviz_cluster(model_k5,data=scale_data,main="plot for k5")
 plot_k5
 
+
+## Visualizing the k=3 by Median Recommendation, Location, and Exchange
+
 Pharma_3to14 <- Pharma %>% select(c("Median_Recommendation", "Location", "Exchange")) %>% mutate(cluster=model_k3$cluster)
 Pharma_3to14
 
 library(ggplot2)
 
+
 ggplot(Pharma_3to14,aes(fill=Median_Recommendation,x=as.factor(cluster)))+geom_bar()
 ggplot(Pharma_3to14,aes(fill=Location,x=as.factor(cluster)))+geom_bar()
 ggplot(Pharma_3to14,aes(fill=Exchange,x=as.factor(cluster)))+geom_bar()
 
+
+## Visualizing the k=5 by Median Recommendation, Location, and Exchange
 
 
 Pharma_3to14 <- Pharma %>% select(c("Median_Recommendation", "Location", "Exchange")) %>% mutate(cluster=model_k5$cluster)
@@ -117,18 +125,6 @@ Pharma_3to14
 ggplot(Pharma_3to14,aes(fill=Median_Recommendation,x=as.factor(cluster)))+geom_bar()
 ggplot(Pharma_3to14,aes(fill=Location,x=as.factor(cluster)))+geom_bar()
 ggplot(Pharma_3to14,aes(fill=Exchange,x=as.factor(cluster)))+geom_bar()
-
-
-
-
-library(tidyverse)
-Pharma %>% pivot_longer(c("Location", "Exchange"),names_to="names",values_to="values")
-View(Pharma %>% pivot_longer(c("Location", "Exchange"),names_to="names",values_to="values"))
-
-View(Pharma %>% pivot_wider(names_from=Median_Recommendation,values_from=Location))
-
-
-
 
 
 
