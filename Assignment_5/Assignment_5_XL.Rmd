@@ -1,0 +1,247 @@
+---
+title: "Assignment_5_XL"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+install.packages("caret")
+library(caret)
+library(dplyr)
+install.packages("tidyverse")
+library(tidyverse)
+install.packages("cluster")
+library(cluster)
+install.packages("factoextra")
+library(factoextra)
+install.packages("cowplot")
+library(cowplot)
+library(ggplot2)
+install.packages("tidyr")
+library(tidyr)
+library(dplyr)
+install.packages("tidyverse")
+library(tidyverse)
+install.packages("cluster")
+library(cluster)
+install.packages("factoextra")
+library(factoextra)
+library(readr)
+
+Cereals <- read_csv("Assignment_5/Cereals.csv")
+cereals_data <- read_csv("Assignment_5/Cereals.csv")
+
+str(cereals_data)
+summary(cereals_data)
+head(cereals_data)
+column_names <- colnames(cereals_data)
+cat_Attr <- "shelf"
+num_Attr = setdiff(column_names, c(cat_Attr, "name"))
+num_Attr
+
+### Converting 'shelf" from categorical variable to factor.
+
+cereals_data$shelf = as.factor(as.character(cereals_data$shelf))
+str(cereals_data)
+
+### Converting the names of the breakfast cereals to the row names.
+
+rownames(cereals_data) <- cereals_data$name
+
+### Drop the name column from cereals_data because the data frame now has the smae information in column 1 and 2.
+
+## this did not work as intended ------ cereals_data <- cereals_data[, -c(colnames(cereals_data) %in% ("name"))]
+
+### That action deleted both column 1 and 2 - repeating steps from the beginning.
+
+### Trying this instead
+### this didn't work as I thought it would ----- cereals_data$name = NULL
+
+
+
+### Data Preprocessing. Remove all cereals with missing values.
+
+### missing values
+
+sum(is.na(cereals_data))
+
+### There are 4 missing values
+
+sum(is.na(cereals_data$shelf))
+sum(is.na(cereals_data))
+colSums(is.na(cereals_data))
+
+cereals_data_copy <- cereals_data
+library(dummies)
+
+shelfDummies <- data.frame(dummy(cereals_data$shelf))
+names(shelfDummies) <- c("Shelf1","Shelf2","Shelf3")
+head(shelfDummies)
+
+cereals_data$shelf = NULL
+cereals_data = data.frame(cbind(cereals_data, shelfDummies))
+head(cereals_data)
+
+## cereals_data %>% drop_na(carbo)
+## cereals_data %>% drop_na(sugars)
+## cereals_data %>% drop_na(potass)
+## sum(is.na(cereals_data))
+
+
+
+library(tidyr)
+
+cereals_data <- drop_na(cereals_data)
+
+colSums(is.na(cereals_data))
+sum(is.na(cereals_data))
+summary(cereals_data)
+head(cereals_data)
+
+
+cereals_data[, num_Attr] =  scale(cereals_data[,num_Attr], center = T, scale = T)
+
+
+cereals_data_num <- cereals_data %>% select_if(is.numeric)
+set.seed(22)
+scale_data <- as.data.frame(scale(cereals_data_num))
+
+cereals_data <- scale_data
+
+
+### Apply hierarchical clustering to the data using Euclidean distance to the normalized measurements. Use Agnes to compare the clustering from single linkage, complete linkage, average linkage, and Ward. Choose the best method.
+
+install.packages("devtools")
+library(devtools)
+
+distance <- get_dist(cereals_data)
+
+dist <- dist(cereals_data, method = "euclidean")
+hc_fit <- hclust(dist, method = "ward.D2")
+plot(hc_fit)
+points_hc <- cutree(hc_fit, k = 6)
+cereals_clusts_hc <- cbind(points_hc, cereals_data)
+
+head(cereals_clusts_hc)
+colnames(cereals_clusts_hc)
+
+library(cluster)
+dist = daisy(x = cereals_data, metric = "euclidean")
+sil_value = silhouette(points_hc, dist = dist)
+plot(sil_value)
+
+
+install.packages("fpc")
+library(fpc)
+
+hclust_stability = clusterboot(cereals_data, clustermethod=hclustCBI, method="ward.D2", k=6, count = FALSE)
+hclust_stability
+
+### * Cluster stability assessment *
+Cluster method:  hclust/cutree 
+Full clustering results are given as parameter result
+of the clusterboot object, which also provides further statistics
+of the resampling results.
+Number of resampling runs:  100 
+
+Number of clusters found in data:  6 
+
+ Clusterwise Jaccard bootstrap (omitting multiple points) mean:
+[1] 0.8718652 0.7181102 0.8782213 0.9643368 0.5108709 0.6658702
+dissolved:
+[1] 14 10  4  1 62 37
+recovered:
+[1] 86 37 78 90 16 39
+
+clusters = hclust_stability$result$partition
+
+hclust_stability$bootmean
+hclust_stability$bootbrd
+
+
+set.seed(123)
+km_basic <- kmeans(cereals_data, centers = 2, nstart = 20)
+str(km_basic)
+fviz_cluster(km_basic, cereals_data)
+
+wss <- 0
+
+set.seed(123)
+fviz_nbclust(cereals_data, kmeans, method = "wss")
+
+
+set.seed(123)
+km_clust <- kmeans(cereals_data, 6)
+km_points <- km_clust$cluster
+
+cereals_clusts_km <- as.data.frame(cbind(km_clust$cluster, cereals_data))
+head(cereals_clusts_km)
+colnames(cereals_clusts_km)
+
+fviz_cluster(km_clust, cereals_data)
+
+dist = daisy(x = cereals_data, metric = "euclidean")
+sil_value = silhouette(km_clust$cluster, dist = dist)
+plot(sil_value)
+
+
+
+set.seed(123)
+km_stability <- clusterboot(cereals_data, clustermethod=kmeansCBI,krange = 6, seed = 123, count = FALSE)
+km_stability
+
+### * Cluster stability assessment *
+Cluster method:  kmeans 
+Full clustering results are given as parameter result
+of the clusterboot object, which also provides further statistics
+of the resampling results.
+Number of resampling runs:  100 
+
+Number of clusters found in data:  6 
+
+ Clusterwise Jaccard bootstrap (omitting multiple points) mean:
+[1] 0.6833475 0.6148652 0.8392186 0.5235016 0.6484018 0.6634178
+dissolved:
+[1] 20 45  5 61 41 27
+recovered:
+[1] 40 53 72 29 40 35
+> 
+
+groups_km = km_stability$result$partition 
+groups_km
+
+
+km_stability$bootmean
+km_stability$bootbrd
+
+
+### How many clusters would you choose? 6
+
+
+
+
+### The elementary public schools would like to choose a set of cereals to include in their daily cafeterias. Every day a different cereal is offered, but all cereals should support a healthy diet. For this goal, you are requested to find a cluster of “healthy cereals.” Should the data be normalized? If not, how should they be used in the cluster analysis? ---- The data should be normalized because the variables with higher ranges will significantly influence the distance. I would choose cluster 3 as it has the tightest grouping with plenty of options to choose from (as shown in the plot from the PDF called cluster plots with 6 clusters)
+
