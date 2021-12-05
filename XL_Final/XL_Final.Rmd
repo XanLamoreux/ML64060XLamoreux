@@ -1,8 +1,8 @@
 ---
 title: "XL_Final"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -67,6 +67,15 @@ library(fastDummies)
 library(caret)
 
 
+setwd("C:/Users/xlamo/Desktop/ML64060XLamoreux")
+
+library(readr)
+
+train <- read_csv("XL_Final/train.csv")
+
+test <- read_csv("XL_Final/test.csv")
+
+
 summary(test)
 summary(train)
 
@@ -86,55 +95,61 @@ sum(is.na(diamond_test))
 sum(is.na(diamond_train))
 
 
-# converting character variables to factors
+### converting character variables to factors
+
 train %>% mutate(cut = as.factor(cut), color = as.factor(color),clarity <- as.factor(clarity))
 
 summary(train)
 
-# bar plot on cut varaiable
+### bar plot on cut variable
+
 ggplot(train, aes(x=cut, fill = cut)) + geom_bar() + theme_classic() + labs(title="Various types of diamond cuts",  x="Cut categories", y = "Count")
 
 
-# bar plot on clarity varaiable
+### bar plot on clarity varaiable
+
 ggplot(train, aes(x=clarity, fill = clarity)) + geom_bar() + theme_classic() + labs(title="Various types of diamond clarity levels", x="diamond clarity levels", y = "Count") 
 
-# Checking the distribution of depth column.
+### Checking the distribution of depth column
+
 ggplot(train, aes(x = depth)) + geom_histogram(fill = 'blue', bins=100) + labs(x="depth", y="Count",title = "Probability Distribution of depth") + theme_classic()
 
 
-# Checking the distribution of carat column.
+### Checking the distribution of carat column
+
 ggplot(train, aes(x = log(carat))) + geom_histogram(fill = 'blue', bins=100) + labs(x="carat", y="Count",title = "Probability Distribution of carat") + theme_classic()
 
 apply(train,2,function(x){any(is.na(x))})
 
-# Correlation
+### Correlation to answer how these variables are related to the price
+
 train_cor <- round(cor(train %>% select_if(is.numeric)), 1)
 
 ggcorrplot(train_cor,  title = "Correlation", type = "lower") + theme(plot.title = element_text(hjust = 0.5), axis.text.x = element_text(angle = 90))
 
 
-# since x, y, z is highly correlated to each other and also it's  highly correlated with caret variable, so removing from dataset
+### since x, y, z is highly correlated to each other and also it's  highly correlated with caret variable, so removing from dataset
+
 train <- train %>% select(-c(x,y,z))
 
-# box plot for all numeric variables
+### box plot for all numeric variables
 
 train %>% select_if(is.numeric) %>% mutate_all(scale) %>% gather("features","values") %>% na.omit() %>% 
 
-
 ggplot(aes(x = features, y = values)) + geom_boxplot(show.legend = FALSE) + stat_summary(fun = mean, geom = "point", pch = 1) +
 
-# Add average to the boxplot
+### Add average to the boxplot
 
 scale_y_continuous(name = "Variable values", minor_breaks = NULL) + scale_fill_brewer(palette = "Set1") + coord_flip() + theme_minimal() + labs(x = "Variable names") + ggtitle(label = "Distribution of numeric variables in diamond train dataset")
 
 
-# Converting category variable to numeric variable.
+### Converting category variable to numeric variable.
 
 train_d <- dummy_cols(train)
 train_d <- train_d %>% select(-c(cut, color, clarity))
 View(train_d)
 
-# Splitting dataset into training (60%) and validation (40%) sets
+### Splitting dataset into training (60%) and validation (40%) sets
 
 
 set.seed(23)
@@ -142,47 +157,44 @@ index <- createDataPartition(train_d$price, p=0.6, list = FALSE)
 train_df <- train_d[index,]
 test_df <- train_d[-index,]
 
-# Defining a function to normalize the data.
+### Defining a function to normalize the data.
 
 scale_fun <- preProcess(train_df %>% select(-price), method = c("center", "scale"))
 train_norm <- predict(scale_fun, train_df)
 test_norm <- predict(scale_fun, test_df)
 
-# Summary statistics of normalized data
+### Summary statistics of normalized data
 summary(train_norm)
 
-# Building a model to estimate the diamond price value
+### Building a model to estimate the diamond price value
 
 diamond_train_model <- lm(price ~ . , data = train_norm)
 summary(diamond_train_model)
 
-# Performance metrics on test data
-# RMSE on test data
+### Performance metrics on test data
+### RMSE on test data
+
 (linear_base_rsme <- sqrt( mean(( test_norm$price - predict( diamond_train_model, test_norm))^2)))
 
-# R squared on test data
+### linear base rmse is  1178.782 --- The evaluation metric chosen for this competition is the RMSE (Root Mean Squared Error)
+
+### https://www.statisticshowto.com/probability-and-statistics/regression-analysis/rmse-root-mean-square-error/
+
+
+### R squared on test data
 
 (linear_base_rsquare <- cor( test_norm$price, predict( diamond_train_model, test_norm))^2)
 
 
+### r squared is 0.9137193 predicting a 91.37% accuracy of the model when applying this model to predict diamond prices based on the variables color, cut, clarity, carat, length, width, depth, and table of the diamond.
+
+summary(test)
+summary(test_norm)
+view(test_norm)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# data was not straight forward needed a lot of transformation before predicting the model and the model is giving an accuracy of 91%
+### data needed a lot of transformation before predicting the model and the model is giving an accuracy of 91%
 
 
 
