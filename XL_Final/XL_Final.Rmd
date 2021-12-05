@@ -89,7 +89,7 @@ diamond_test <- read_csv("XL_Final/test.csv")
 diamond_train <- read_csv("XL_Final/train.csv")
 
 head(diamond_test)
-head(diamond_train)
+summary(diamond_train)
 
 sum(is.na(diamond_test))
 sum(is.na(diamond_train))
@@ -109,6 +109,9 @@ ggplot(train, aes(x=cut, fill = cut)) + geom_bar() + theme_classic() + labs(titl
 ### bar plot on clarity varaiable
 
 ggplot(train, aes(x=clarity, fill = clarity)) + geom_bar() + theme_classic() + labs(title="Various types of diamond clarity levels", x="diamond clarity levels", y = "Count") 
+
+
+
 
 ### Checking the distribution of depth column
 
